@@ -1,6 +1,6 @@
-# Project Name
+# Flutter Firebase Authentication App
 
-A brief description of what your project does and its purpose.
+A simple Flutter application with Firebase authentication. This project demonstrates how to create user accounts, log in, and manage authentication flows using Firebase in a Flutter app. It's designed to help beginners understand the integration of Firebase Authentication with Flutter.
 
 ## Features
 
