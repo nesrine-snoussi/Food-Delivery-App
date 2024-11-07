@@ -1,16 +1,34 @@
-# project1
+# Project Name
 
-A new Flutter project.
+A brief description of what your project does and its purpose.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- User Registration
+- User Login
+- Firebase Authentication
+- Redirection to the home screen after login
+- User Authentication Flow
 
-A few resources to get you started if this is your first Flutter project:
+## Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter 3.0
+- Firebase Authentication
+- Firebase Firestore (optional if you use Firestore)
+- Dart
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Prerequisites
+
+Before running this app, ensure you have the following installed:
+
+- [Flutter SDK](https://flutter.dev/docs/get-started/install)
+- [Firebase Project](https://firebase.google.com/)
+- [Android Studio](https://developer.android.com/studio) or any code editor of your choice
+- A Firebase Authentication setup
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your_username/your_repo_name.git
