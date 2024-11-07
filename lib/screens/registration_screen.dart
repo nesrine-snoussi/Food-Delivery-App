@@ -71,93 +71,92 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       appBar: AppBar(
         title: const Text('Registration'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Image section with border and shadow
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: Colors.white70,
-                  width: 2,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white60,
-                    offset: Offset(0, 4),
-                    blurRadius: 10,
+      body: SingleChildScrollView(  // Wrap Column in SingleChildScrollView
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Image section with border and shadow
+              Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: Colors.white70,
+                    width: 2,
                   ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
-                  'assets/pizza-1.png',
-                  width: 60,
-                  height: 60,
-                  fit: BoxFit.contain,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.white60,
+                      offset: Offset(0, 4),
+                      blurRadius: 10,
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    'assets/pizza-1.png',
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 30),
-            const Text(
-              'Create a New Account',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
+              const SizedBox(height: 30),
+              const Text(
+                'Create a New Account',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _confirmPasswordController,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Confirm Password'),
-            ),
-            const SizedBox(height: 16),
-            OutlinedButton(
-              onPressed: _isLoading ? null : _register,
-              style: OutlinedButton.styleFrom(
-                minimumSize: Size(double.infinity, 36),
-
-                backgroundColor: Colors.blue,  // Set button background color
-                side: BorderSide(color: Colors.blue),
-                // Make button width equal to TextField width
+              const SizedBox(height: 12),
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
               ),
-              child: _isLoading
-                  ? CircularProgressIndicator()
-                  : const Text('Register'),
-
-            ),
-            const SizedBox(height: 16),
-            if (_errorMessage.isNotEmpty)
-              Text(
-                _errorMessage,
-                style: TextStyle(color: Colors.red),
+              const SizedBox(height: 16),
+              TextField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(labelText: 'Password'),
               ),
-            const SizedBox(height: 16),
-            const Text(
-              'By creating an account, you are agreeing to our Terms of Service and Privacy Policy.',
-              style: TextStyle(fontSize: 12),
-              textAlign: TextAlign.center,
-            ),
-          ],
+              const SizedBox(height: 16),
+              TextField(
+                controller: _confirmPasswordController,
+                obscureText: true,
+                decoration: const InputDecoration(labelText: 'Confirm Password'),
+              ),
+              const SizedBox(height: 16),
+              OutlinedButton(
+                onPressed: _isLoading ? null : _register,
+                style: OutlinedButton.styleFrom(
+                  minimumSize: Size(double.infinity, 36),
+                  backgroundColor: Colors.blue,
+                  side: BorderSide(color: Colors.blue),
+                ),
+                child: _isLoading
+                    ? CircularProgressIndicator()
+                    : const Text('Register'),
+              ),
+              const SizedBox(height: 16),
+              if (_errorMessage.isNotEmpty)
+                Text(
+                  _errorMessage,
+                  style: TextStyle(color: Colors.red),
+                ),
+              const SizedBox(height: 16),
+              const Text(
+                'By creating an account, you are agreeing to our Terms of Service and Privacy Policy.',
+                style: TextStyle(fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );
