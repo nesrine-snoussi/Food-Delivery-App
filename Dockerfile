@@ -1,26 +1,24 @@
-# Use an official Flutter image from the Docker Hub as the base image
-FROM cirrusci/flutter:stable AS build
+# Use the official Flutter Docker image
+FROM cirrusci/flutter:stable
 
-# Set the working directory inside the container
+# Create and switch to a non-root user
+RUN useradd -m flutteruser
+USER flutteruser
+
+# Set the working directory to /app
 WORKDIR /app
 
 # Copy the Flutter project files into the container
 COPY . .
 
-# Get dependencies
+# Get dependencies (flutter pub get)
 RUN flutter pub get
 
 # Build the Flutter app for the desired platform (e.g., web or apk)
-RUN flutter build web # Or use 'flutter build apk' for Android
+RUN flutter build web  # Or use flutter build apk depending on your target
 
-# Use a minimal web server to serve the app (if building for the web)
-FROM nginx:alpine
+# Expose the port (for web apps, e.g., port 5000)
+EXPOSE 5000
 
-# Copy the build output to the Nginx server directory
-COPY --from=build /app/build/web /usr/share/nginx/html
-
-# Expose the port on which the app will be served
-EXPOSE 80
-
-# Start Nginx to serve the Flutter web app
-CMD ["nginx", "-g", "daemon off;"]
+# Set the command to run the app
+CMD ["flutter", "run", "-d", "chrome"]  # Use appropriate command for your platform
