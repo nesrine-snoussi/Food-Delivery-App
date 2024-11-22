@@ -1,29 +1,35 @@
-# Use the official Flutter Docker image (stable version)
+# Use the official Flutter Docker image
 FROM cirrusci/flutter:stable
 
-# Switch to root user to ensure we have permissions for setup
-USER root
+# Set environment variables
+ENV PUB_CACHE=/app/.pub-cache
 
-# Set the working directory to /app
+# Set working directory
 WORKDIR /app
 
 # Copy the Flutter project files into the container
 COPY . .
 
-# Resolve "dubious ownership" error by configuring Git
+# Install the required Dart SDK version (3.5.4)
+RUN apt-get update && \
+    apt-get install -y unzip curl && \
+    curl -LO https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.4/sdk/dartsdk-linux-x64-release.zip && \
+    unzip dartsdk-linux-x64-release.zip -d /opt/dart-sdk && \
+    rm dartsdk-linux-x64-release.zip && \
+    export PATH="/opt/dart-sdk/dart-sdk/bin:$PATH"
+
+# Configure Git for safe directory usage
 RUN git config --global --add safe.directory /sdks/flutter
 
-# Ensure proper permissions for the Flutter directory
-RUN chmod -R a+w /sdks/flutter && chmod -R a+w /app
-
-# Clean previous builds and ensure correct dependencies
+# Clean previous builds and install dependencies
+RUN flutter clean
 RUN flutter pub get
 
 # Build the Android app
 RUN flutter build apk --release
 
-# Expose any necessary ports (if needed for debugging or testing)
+# Expose any necessary ports (if needed for debugging)
 EXPOSE 8080
 
-# Default command (if running the app directly from the container isn't intended, you can remove this)
+# Default command
 CMD ["echo", "Flutter Android build complete!"]
