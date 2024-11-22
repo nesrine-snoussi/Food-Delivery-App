@@ -1,7 +1,7 @@
 # Use the official Flutter Docker image (stable version)
 FROM cirrusci/flutter:stable
 
-# Create and switch to a non-root user
+# Create a non-root user
 RUN useradd -m flutteruser
 USER flutteruser
 
@@ -11,7 +11,10 @@ WORKDIR /app
 # Copy the Flutter project files into the container
 COPY . .
 
-# Clear any old dependencies and ensure the correct versions
+# Configure Git to avoid the "dubious ownership" error
+RUN git config --global --add safe.directory /sdks/flutter
+
+# Clear any old dependencies
 RUN flutter clean
 
 # Get dependencies (flutter pub get)
